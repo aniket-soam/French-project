@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StyleKart - Fashion Demo</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:"Poppins",sans-serif;}
+body{
+  background:linear-gradient(180deg,#f6f8fb 0%,#ffffff 60%);
+  color:#222;
+}
+header{
+  text-align:center;
+  padding:22px 16px;
+  background:linear-gradient(90deg,#67b26f 0%,#4ca2cb 100%);
+  color:white;
+  box-shadow:0 3px 10px rgba(0,0,0,0.08);
+}
+header h1{font-size:1.9rem;margin-bottom:5px;}
+.tagline{font-size:.95rem;opacity:.95;}
+nav{
+  background:#273444;
+  display:flex;justify-content:center;gap:18px;
+  padding:10px 8px;
+  box-shadow:0 2px 6px rgba(0,0,0,0.06);
+}
+nav a{
+  color:#fff;text-decoration:none;font-weight:600;
+  padding:6px 10px;border-radius:6px;
+}
+nav a:hover{background:rgba(255,255,255,0.1);}
+.cart-badge{
+  background:#ffcc00;color:#111;
+  font-weight:700;padding:3px 7px;border-radius:999px;margin-left:6px;font-size:.85rem;
+}
+.wrap{max-width:1200px;margin:26px auto;padding:0 16px;}
+h2.section-title{
+  display:inline-block;padding:8px 14px;border-radius:8px;
+  background:linear-gradient(90deg,#eef7ff,#fff6ff);
+  color:#16324f;border:1px solid #e6eefb;margin:0 0 18px 0;
+}
+.products{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
+}
+.card{
+  background:white;border-radius:12px;padding:12px;
+  border:1px solid #e6e9ef;
+  box-shadow:0 6px 18px rgba(30,40,68,0.04);
+  text-align:center;
+  transition:transform .18s,box-shadow .18s,border-color .18s;
+}
+.card:hover{
+  transform:translateY(-6px);
+  border-color:#9fe6d8;
+  box-shadow:0 12px 30px rgba(30,40,68,0.08);
+}
+.card img{width:100%;height:220px;object-fit:cover;border-radius:8px;border-bottom:3px solid #e9f7f3;}
+.card h3{margin:10px 0 6px;font-size:1.05rem;}
+.price{color:#d94a4a;font-weight:700;margin:6px 0;}
+.color{color:#666;font-size:.92rem;margin-bottom:8px;}
+.btn{
+  background:linear-gradient(90deg,#00b894,#00cec9);
+  border:none;color:white;padding:9px 14px;border-radius:20px;
+  cursor:pointer;font-weight:700;transition:transform .12s,opacity .12s;
+}
+.btn:hover{transform:translateY(-2px);opacity:.95;}
+.buy-all{
+  margin-top:20px;display:block;width:fit-content;margin-left:auto;margin-right:auto;
+  padding:12px 26px;border-radius:12px;
+  background:linear-gradient(90deg,#4ca2cb,#67b26f);
+  color:#fff;font-weight:800;border:none;cursor:pointer;
+}
+.contact-box{
+  width:100%;max-width:760px;margin:30px auto;
+  background:linear-gradient(90deg,#c3f5d0 0%,#c3e9f7 100%);
+  border:1px solid #dff0ea;padding:14px 18px;border-radius:10px;
+  text-align:center;box-shadow:0 6px 18px rgba(20,30,40,0.03);
+}
+footer{
+  margin-top:30px;padding:18px 10px;text-align:center;
+  background:#273444;color:white;border-top:4px solid #00cec9;
+}
+#cartView{
+  display:none;background:#fff;padding:18px;border-radius:12px;
+  border:1px solid #e6eefb;box-shadow:0 6px 18px rgba(30,40,68,0.05);
+}
+.popup{
+  position:fixed;right:18px;top:18px;
+  background:linear-gradient(90deg,#00b894,#00cec9);
+  color:#fff;padding:10px 16px;border-radius:10px;display:none;
+  box-shadow:0 8px 20px rgba(0,0,0,0.12);
+  font-weight:700;
+}
+@media(max-width:640px){
+  header h1{font-size:1.5rem;}
+  .card img{height:200px;}
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>🛍️ StyleKart</h1>
+  <div class="tagline">Fashion that fits your style — simple demo for school project</div>
+</header>
+
+<nav>
+  <a href="#women" onclick="showSection('women')">Women</a>
+  <a href="#men" onclick="showSection('men')">Men</a>
+  <a href="#accessories" onclick="showSection('accessories')">Accessories</a>
+  <a href="#cart" onclick="showCart()">Cart <span id="cartCount" class="cart-badge">0</span></a>
+</nav>
+
+<div class="wrap">
+  <div id="women" class="section">
+    <h2 class="section-title">👗 Women's Collection</h2>
+    <div class="products">
+      <div class="card"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdW9sYBy-Y1HoZITHgsTnsbF2e5CtG5PXM_WjU9jgTow&s=10"><h3>Floral Dress</h3><div class="price">₹999</div><div class="color">Color: Pink</div><button class="btn" onclick="addToCart('Floral Dress',999)">Add to Cart</button></div>
+      <div class="card"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHJTOA5bCLVm1xVALbuhsWW-i1fmWM1PuA8rc98L3j0Q&s=10"><h3>Blue Kurti</h3><div class="price">₹799</div><div class="color">Color: Blue</div><button class="btn" onclick="addToCart('Blue Kurti',799)">Add to Cart</button></div>
+      <div class="card"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRq2tsUx8q0umlpLo04G1ZVsaubWi0hqMWF50Ls2GeOJQ&s=10"><h3>Denim Jacket</h3><div class="price">₹1,299</div><div class="color">Color: Denim Blue</div><button class="btn" onclick="addToCart('Denim Jacket',1299)">Add to Cart</button></div>
+      <div class="card"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGdCphTBBdXci11V8EQLHc48OaWYXEWHxO8cUaLIDgEQ&s=10"><h3>Party Gown</h3><div class="price">₹1,599</div><div class="color">Color: Red</div><button class="btn" onclick="addToCart('Party Gown',1599)">Add to Cart</button></div>
+    </div>
+  </div>
+
+  <div id="men" class="section" style="display:none;">
+    <h2 class="section-title">👕 Men's Collection</h2>
+    <div class="products">
+      <div class="card"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWtS8mNAn65HnjBkvrfK0o8dwoXAYIpYIXzb7FlgYnWA&s=10><h3>Graphic T-Shirt</h3><div class="price">₹599</div><div class="color">Color: Black</div><button class="btn" onclick="addToCart('Graphic T-Shirt',599)">Add to Cart</button></div>
+      <div class="card"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkG_YG_aL1qupgHs0l745EE4tAIqsev5GfTpUaKfe9CA&s=10"><h3>Formal Shirt</h3><div class="price">₹899</div><div class="color">Color: Blue</div><button class="btn" onclick="addToCart('Formal Shirt',899)">Add to Cart</button></div>
+      <div class="card"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQW_TFzryOcTRfLopuOgBwgZkS52Bh29qRuJut-aGrUBA&s=10"><h3>Leather Jacket</h3><div class="price">₹2,199</div><div class="color">Color: Brown</div><button class="btn" onclick="addToCart('Leather Jacket',2199)">Add to Cart</button></div>
+      <div class="card"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTP2AYt9VrFchSB-Q97JMTAlLDOh23w67z5W42eUyJRw&s=10"><h3>Hoodie</h3><div class="price">₹1,099</div><div class="color">Color: Grey</div><button class="btn" onclick="addToCart('Hoodie',1099)">Add to Cart</button></div>
+    </div>
+  </div>
+
+  <div id="accessories" class="section" style="display:none;">
+    <h2 class="section-title">🕶️ Accessories</h2>
+    <div class="products">
+      <div class="card"><img src="https://i.imgur.com/owLDmlv.jpg"><h3>Wrist Watch</h3><div class="price">₹1,499</div><button class="btn" onclick="addToCart('Wrist Watch',1499)">Add to Cart</button></div>
+      <div class="card"><img src="https://i.imgur.com/09gWRkg.jpg"><h3>Sunglasses</h3><div class="price">₹899</div><button class="btn" onclick="addToCart('Sunglasses',899)">Add to Cart</button></div>
+      <div class="card"><img src="https://i.imgur.com/r2bCEVb.jpg"><h3>Leather Belt</h3><div class="price">₹499</div><button class="btn" onclick="addToCart('Leather Belt',499)">Add to Cart</button></div>
+      <div class="card"><img src="https://i.imgur.com/f8rLK4S.jpg"><h3>Handbag</h3><div class="price">₹1,199</div><button class="btn" onclick="addToCart('Handbag',1199)">Add to Cart</button></div>
+      <div class="card"><img src="https://i.imgur.com/nKl7oNb.jpg"><h3>Cap</h3><div class="price">₹299</div><button class="btn" onclick="addToCart('Cap',299)">Add to Cart</button></div>
+      <div class="card"><img src="https://i.imgur.com/CHsZzCO.jpg"><h3>Bracelet</h3><div class="price">₹249</div><button class="btn" onclick="addToCart('Bracelet',249)">Add to Cart</button></div>
+    </div>
+  </div>
+
+  <div id="cartView" class="section">
+    <h2 class="section-title">🛒 Your Cart</h2>
+    <div id="cartItems"></div>
+    <button class="buy-all" onclick="buyAll()">Buy All Items</button>
+  </div>
+
+  <div class="contact-box">
+    <strong>Need help?</strong>
+    <p style="margin:8px 0 6px;">📧 support@stylekart.in | 📞 +91 98765 43210</p>
+    <p style="margin:0;">🏬 123 Fashion Street, Mumbai, India — Demo address for school project</p>
+  </div>
+</div>
+
+<footer>
+  <div>© 2025 StyleKart | Designed for School Project</div>
+  <div style="margin-top:8px;">Follow us on 💙 Instagram &nbsp;•&nbsp; Facebook</div>
+</footer>
+
+<div class="popup" id="popup">Added to cart!</div>
+
+<script>
+let cart=[];
+function showSection(id){
+  document.querySelectorAll('.section').forEach(s=>s.style.display='none');
+  document.getElementById(id).style.display='block';
+}
+function addToCart(name,price){
+  cart.push({name,price});
+  document.getElementById('cartCount').innerText=cart.length;
+  const popup=document.getElementById('popup');
+  popup.innerText=`${name} added to cart!`;
+  popup.style.display='block';
+  setTimeout(()=>popup.style.display='none',1500);
+}
+function showCart(){
+  document.querySelectorAll('.section').forEach(s=>s.style.display='none');
+  document.getElementById('cartView').style.display='block';
+  let html='';
+  let total=0;
+  cart.forEach(c=>{
+    html+=`<p>${c.name} - ₹${c.price}</p>`;
+    total+=c.price;
+  });
+  html+=`<hr><p><b>Total: ₹${total}</b></p>`;
+  document.getElementById('cartItems').innerHTML=html||'<p>Your cart is empty!</p>';
+}
+function buyAll(){
+  if(cart.length===0) alert('Your cart is empty!');
+  else alert('🛍️ Thank you for shopping at StyleKart!');
+}
+</script>
+</body>
+</html>
